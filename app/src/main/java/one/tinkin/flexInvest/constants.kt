@@ -17,3 +17,5 @@ const val BASE_URL = "https://prod.flexinvest.com/drf/"
 const val AUTH_URL = "auth/"
 const val STRATEGIES_URL = "strategies/"
 const val AUTHORIZATION_HEADER = "Authorization"
+
+const val THREE_MINUTES = 180000

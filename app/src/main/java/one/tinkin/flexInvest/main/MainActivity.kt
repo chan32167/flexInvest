@@ -70,7 +70,7 @@ class MainActivity : BaseActivity() {
 
   private fun checkTokenAndRefreshIfNecessary() {
     with(sharedPref!!) {
-      if (System.currentTimeMillis() - this.getLong(TOKEN_CREATION_KEY, 0) > 180000) {
+      if (System.currentTimeMillis() - this.getLong(TOKEN_CREATION_KEY, 0) > THREE_MINUTES) {
         disposableLogin = FlexInvestServe.login(LoginRequest(this.getString(USERNAME_KEY, "")!!, this.getString(PASSWORD_KEY, "")!!)).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -89,7 +89,7 @@ class MainActivity : BaseActivity() {
   private fun signOut() {
     val intent = Intent(this, LoginActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
-    sharedPref!!.edit().putBoolean(LOGGED_IN_KEY, false)
+    sharedPref!!.edit().putBoolean(LOGGED_IN_KEY, false).apply()
     startActivity(intent)
   }
 
