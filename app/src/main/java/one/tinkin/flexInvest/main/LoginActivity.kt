@@ -20,7 +20,7 @@ class LoginActivity : BaseActivity() {
           .observeOn(AndroidSchedulers.mainThread())
           .subscribe(
               { result -> processData(result.token) },
-              { error -> makeToast(getString(R.string.error_login)) }
+              { makeToast(getString(R.string.error_login)) }
           )
     }
   }
