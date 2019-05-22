@@ -65,8 +65,7 @@ class MainActivity : BaseActivity() {
   }
 
   fun getLocalData() {
-    var companies = CompanyRepository(this).findAll()
-    rv_data.adapter = CompanyAdapter(companies, this)
+    rv_data.adapter = CompanyAdapter(CompanyRepository(this).findAll(), this)
   }
 
   private fun checkTokenAndRefreshIfNecessary() {
@@ -90,10 +89,8 @@ class MainActivity : BaseActivity() {
   private fun signOut() {
     val intent = Intent(this, LoginActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+    sharedPref!!.edit().putBoolean(LOGGED_IN_KEY, false)
     startActivity(intent)
-  }
-
-  override fun onBackPressed() {
   }
 
 }

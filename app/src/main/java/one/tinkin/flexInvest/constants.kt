@@ -9,6 +9,7 @@ const val USERNAME_KEY = "username"
 const val PASSWORD_KEY = "password"
 const val TOKEN_KEY = "token"
 const val TOKEN_CREATION_KEY = "tokenCreation"
+const val LOGGED_IN_KEY = "loggedIn"
 const val PREFS_FILENAME = "one.tinkin.flexinvest.prefs"
 
 // Services

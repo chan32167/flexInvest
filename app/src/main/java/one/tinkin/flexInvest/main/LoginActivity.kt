@@ -13,6 +13,7 @@ class LoginActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    checkIfAlreadyLoggedIn()
     setContentView(R.layout.activity_login)
     bt_login.setOnClickListener {
       disposableLogin = FlexInvestServe.login(LoginRequest(et_username.text.toString(), et_password.text.toString())).subscribeOn(Schedulers.io())
@@ -30,8 +31,20 @@ class LoginActivity : BaseActivity() {
       putLong(TOKEN_CREATION_KEY, System.currentTimeMillis())
       putString(USERNAME_KEY, et_username.text.toString())
       putString(PASSWORD_KEY, et_password.text.toString())
+      putBoolean(LOGGED_IN_KEY, true)
       apply()
     }
+    navigateToMainActivity()
+
+  }
+
+  private fun checkIfAlreadyLoggedIn() {
+    if(sharedPref!!.getBoolean(LOGGED_IN_KEY, false)) {
+      navigateToMainActivity()
+    }
+  }
+
+  private fun navigateToMainActivity() {
     val intent = Intent(this, MainActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
     startActivity(intent)
