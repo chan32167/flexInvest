@@ -87,9 +87,9 @@ class MainActivity : BaseActivity() {
   }
 
   private fun signOut() {
+    sharedPref!!.edit().putBoolean(LOGGED_IN_KEY, false).apply()
     val intent = Intent(this, LoginActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
-    sharedPref!!.edit().putBoolean(LOGGED_IN_KEY, false).apply()
     startActivity(intent)
   }
 
